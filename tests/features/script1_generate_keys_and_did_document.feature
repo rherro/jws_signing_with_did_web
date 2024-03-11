@@ -6,3 +6,7 @@ Feature: Script 1 - Generate a key pair and did document
     Scenario: Generate a key pair and save to disk
         When I generate a private/public keypair
         Then I see that a file is generated for both a private and public key
+
+    Scenario: Generate a did:web document from the saved keypair
+        When I generate a did:web document from the saved keypair
+        Then I see that a file is generated containing the did:web document
