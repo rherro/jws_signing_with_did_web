@@ -1,33 +1,31 @@
-import os
 import json
 from jwcrypto import jwk
 
+DEFAULT_DID = 'did:web:example.com'
 PEM_PASSWORD = 'WEAK_PASSWORD_FOR_DATA_AT_REST'.encode()
 
 
 def generate_key_pair():
     key = jwk.JWK.generate(kty='OKP', crv='Ed25519')
-    public_key = key.export_to_pem(private_key=False)
-    private_key = key.export_to_pem(private_key=True, password=PEM_PASSWORD)
+    save_key_pair_to_disk(key)
+    return key
 
+
+def save_key_pair_to_disk(key):
+    private_key = key.export_to_pem(private_key=True, password=PEM_PASSWORD)
     with open('private_key.pem', 'wb') as f:
         f.write(private_key)
 
+    public_key = key.export_to_pem(private_key=False)
     with open('public_key.pem', 'wb') as f:
         f.write(public_key)
-
-    return key
 
 
 def generate_did_web():
     key = generate_key_pair()
-    if not os.path.isfile('private_key.pem') or not os.path.isfile('public_key.pem'):
-        raise RuntimeError('Unable to generate did document because no keys exist!')
-
-    did = 'did:web:example.com'
     public_key_jwk = key.export_public()
 
-    content = create_did_document_contents(did, public_key_jwk)
+    content = create_did_document_contents(DEFAULT_DID, public_key_jwk)
 
     with open('did.json', 'wb') as f:
         f.write(json.dumps(content).encode())

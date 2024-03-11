@@ -15,15 +15,6 @@ def step_impl(context):
     assert os.path.isfile('public_key.pem')
 
 
-@given("I have no key files")
-def step_impl(context):
-    os.remove('private_key.pem')
-    os.remove('public_key.pem')
-
-    assert not os.path.isfile('private_key.pem')
-    assert not os.path.isfile('public_key.pem')
-
-
 @when("I generate a did:web document from the saved keypair")
 def step_impl(context):
     generate_did_web()
