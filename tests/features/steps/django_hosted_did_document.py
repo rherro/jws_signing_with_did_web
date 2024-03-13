@@ -2,13 +2,12 @@ import os
 from behave import *
 import urllib.request
 import urllib.error
-from generate_keys_and_did_document import generate_did_web
+from generate_keys_and_did_document import generate_did_web, DID_WEB_FILENAME
 
 use_step_matcher("re")
 
 BASE_URL = 'http://localhost:8000'
 DID_WEB_URL = f'{BASE_URL}/.well-known/did.json'
-DID_WEB_DOCUMENT_PATH = 'did.json'
 
 
 @step("I startup the local django webserver")
@@ -32,13 +31,13 @@ def step_impl(context):
 
 @step("no DID:WEB document exists")
 def step_impl(context):
-    if os.path.exists(DID_WEB_DOCUMENT_PATH):
-        os.remove(DID_WEB_DOCUMENT_PATH)
+    if os.path.exists(DID_WEB_FILENAME):
+        os.remove(DID_WEB_FILENAME)
 
 
 @step("a DID:WEB document exists")
 def step_impl(context):
-    if not os.path.exists(DID_WEB_DOCUMENT_PATH):
+    if not os.path.exists(DID_WEB_FILENAME):
         generate_did_web()
 
 

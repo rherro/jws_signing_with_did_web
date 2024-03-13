@@ -2,6 +2,7 @@ import json
 from src.generate_key_pair import generate_key_pair
 
 DEFAULT_DID = 'did:web:example.com'
+DID_WEB_FILENAME = 'data/did.json'
 
 
 def generate_did_web():
@@ -10,7 +11,7 @@ def generate_did_web():
 
     content = create_did_document_contents(DEFAULT_DID, public_key_jwk)
 
-    with open('did.json', 'w') as f:
+    with open(DID_WEB_FILENAME, 'w') as f:
         f.write(json.dumps(content, indent=4))
 
 

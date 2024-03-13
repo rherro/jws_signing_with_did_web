@@ -7,7 +7,7 @@ import urllib.request
 BASE_URL = 'http://localhost:8000'
 DID_WEB_URL = f'{BASE_URL}/.well-known/did.json'
 DID_WEB_DOCUMENT_PATH = 'did.json'
-JWT_FILENAME = 'jwt'
+JWT_FILENAME = 'data/jwt'
 
 MESSAGE = """
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna 

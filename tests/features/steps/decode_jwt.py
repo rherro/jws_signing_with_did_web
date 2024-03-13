@@ -1,10 +1,9 @@
 import os
 from behave import *
 from src.jwt_handler import decode_jwt
-from src.generate_key_pair import generate_key_pair
-from src.generate_did import generate_did_web
+from src.generate_key_pair import generate_key_pair, PRIVATE_KEY_FILENAME
+from src.generate_did import generate_did_web, DID_WEB_FILENAME
 from src.jwt_handler import create_jwt, PAYLOAD
-from django_hosted_did_document import DID_WEB_DOCUMENT_PATH
 
 use_step_matcher("re")
 
@@ -32,11 +31,11 @@ def step_impl(context):
 
 @given("No dependency files exist")
 def step_impl(context):
-    if os.path.exists(DID_WEB_DOCUMENT_PATH):
-        os.remove(DID_WEB_DOCUMENT_PATH)
+    if os.path.exists(DID_WEB_FILENAME):
+        os.remove(DID_WEB_FILENAME)
 
-    if os.path.isfile('private_key.pem'):
-        os.remove('private_key.pem')
+    if os.path.isfile(PRIVATE_KEY_FILENAME):
+        os.remove(PRIVATE_KEY_FILENAME)
 
 
 @then("I am unable to extract the original payload")

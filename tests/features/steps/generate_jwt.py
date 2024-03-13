@@ -1,7 +1,7 @@
 import os
 from behave import *
-from src.generate_key_pair import generate_key_pair
-from src.jwt_handler import create_jwt
+from src.generate_key_pair import generate_key_pair, PRIVATE_KEY_FILENAME
+from src.jwt_handler import create_jwt, JWT_FILENAME
 
 use_step_matcher("re")
 
@@ -16,27 +16,27 @@ def step_impl(context):
 
 @then("I see that the JWT has been created successfully")
 def step_impl(context):
-    assert os.path.isfile('jwt')
+    assert os.path.isfile(JWT_FILENAME)
 
 
 @given("No JWT file exists")
 def step_impl(context):
-    if os.path.isfile('jwt'):
-        os.remove('jwt')
+    if os.path.isfile(JWT_FILENAME):
+        os.remove(JWT_FILENAME)
 
 
 @then("I see that no JWT has been created")
 def step_impl(context):
-    assert not os.path.isfile('jwt')
+    assert not os.path.isfile(JWT_FILENAME)
 
 
 @given("No private keys exist")
 def step_impl(context):
-    if os.path.isfile('private_key.pem'):
-        os.remove('private_key.pem')
+    if os.path.isfile(PRIVATE_KEY_FILENAME):
+        os.remove(PRIVATE_KEY_FILENAME)
 
 
 @given("A private key exists")
 def step_impl(context):
-    if not os.path.isfile('private_key.pem'):
+    if not os.path.isfile(PRIVATE_KEY_FILENAME):
         generate_key_pair()
