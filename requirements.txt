@@ -1,3 +1,4 @@
 behave
 django
 jwcrypto
+pyjwt[crypto]

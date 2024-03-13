@@ -21,6 +21,15 @@ def save_key_pair_to_disk(key):
         f.write(public_key)
 
 
+def read_private_key_from_disk():
+    with open('private_key.pem', 'rb') as f:
+        data = f.read()
+
+        key = jwk.JWK()
+        key.import_from_pem(data=data, password=PEM_PASSWORD)
+        return key.export_to_pem(private_key=True, password=None)
+
+
 def generate_did_web():
     key = generate_key_pair()
     public_key_jwk = key.export_public()
