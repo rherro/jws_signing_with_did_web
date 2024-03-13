@@ -1,4 +1,4 @@
-Feature: Script 2 - Host DID document on django webserver
+Feature: Part 2 - Host DID document on django webserver
     As an administrator
     I want to retrieve a hosted DID document
     So I can use its public key
