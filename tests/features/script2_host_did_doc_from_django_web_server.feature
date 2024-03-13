@@ -3,11 +3,14 @@ Feature: Script 2 - Host DID document on django webserver
     I want to retrieve a hosted DID document
     So I can use its public key
 
-    Scenario: A django webserver is running
-        When I startup the local django webserver
-        Then I can navigate to the root index page
+    Scenario: I receive an error when attempting to retrieve the DID:WEB document before it's created
+        Given I startup the local django webserver
+        And no DID:WEB document exists
+        When I attempt to retrieve a DID:WEB document
+        Then I receive a "404 Not Found error"
 
-#    Scenario: A django webserver is running
-#        Given I startup the local django webserver
-#        When I attempt to retrieve a DID:WEB document
-#        Then I receive the contents of the DID:WEB document
+    Scenario: I am able to retrieve a hosted DID:WEB document
+        Given I startup the local django webserver
+        And a DID:WEB document exists
+        When I attempt to retrieve a DID:WEB document
+        Then I receive the contents of the DID:WEB document
