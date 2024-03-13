@@ -6,7 +6,7 @@ DEFAULT_DID = 'did:web:example.com'
 
 def generate_did_web():
     key = generate_key_pair()
-    public_key_jwk = key.export_public()
+    public_key_jwk = json.loads(key.export_public())
 
     content = create_did_document_contents(DEFAULT_DID, public_key_jwk)
 
