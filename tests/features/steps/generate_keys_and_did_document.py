@@ -1,6 +1,8 @@
 import os
 from behave import *
-from src.generate_key_pair import generate_key_pair, generate_did_web
+from src.generate_key_pair import generate_key_pair
+from src.generate_did import generate_did_web
+
 use_step_matcher("re")
 
 
