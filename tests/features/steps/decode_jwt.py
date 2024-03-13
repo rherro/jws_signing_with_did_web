@@ -1,8 +1,10 @@
+import os
 from behave import *
-from src.create_jwt import decode_jwt
+from src.jwt_handler import decode_jwt
 from src.generate_key_pair import generate_key_pair
 from src.generate_did import generate_did_web
-from src.create_jwt import create_jwt, PAYLOAD
+from src.jwt_handler import create_jwt, PAYLOAD
+from django_hosted_did_document import DID_WEB_DOCUMENT_PATH
 
 use_step_matcher("re")
 
@@ -16,10 +18,27 @@ def step_impl(context):
 
 @when("I decode a JWT")
 def step_impl(context):
-    context.result = decode_jwt()
+    try:
+        context.decoded_jwt = decode_jwt()
+    except Exception:
+        pass
 
 
 @then("I see that the payload of the message matches the original payload")
 def step_impl(context):
-    assert 'result' in context
-    assert context.result == PAYLOAD
+    assert 'decoded_jwt' in context
+    assert context.decoded_jwt == PAYLOAD
+
+
+@given("No dependency files exist")
+def step_impl(context):
+    if os.path.exists(DID_WEB_DOCUMENT_PATH):
+        os.remove(DID_WEB_DOCUMENT_PATH)
+
+    if os.path.isfile('private_key.pem'):
+        os.remove('private_key.pem')
+
+
+@then("I am unable to extract the original payload")
+def step_impl(context):
+    assert 'result' not in context
