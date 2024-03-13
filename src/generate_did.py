@@ -10,8 +10,8 @@ def generate_did_web():
 
     content = create_did_document_contents(DEFAULT_DID, public_key_jwk)
 
-    with open('did.json', 'wb') as f:
-        f.write(json.dumps(content).encode())
+    with open('did.json', 'w') as f:
+        f.write(json.dumps(content, indent=4))
 
 
 def create_did_document_contents(did, public_key_jwk):
