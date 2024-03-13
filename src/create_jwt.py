@@ -12,4 +12,8 @@ occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim 
 def create_jwt():
     private_key = read_private_key_from_disk()
     encoded_jwt = jwt.encode({"payload": PAYLOAD}, private_key, algorithm="EdDSA")
+
+    with open('jwt', 'w') as f:
+        f.write(encoded_jwt)
+
     return encoded_jwt

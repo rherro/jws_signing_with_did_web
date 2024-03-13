@@ -9,20 +9,25 @@ use_step_matcher("re")
 @when("I attempt to create a JWT using a private key")
 def step_impl(context):
     try:
-        context.jwt = create_jwt()
-    except:
+        create_jwt()
+    except Exception:
         pass
 
 
 @then("I see that the JWT has been created successfully")
 def step_impl(context):
-    assert 'jwt' in context
-    assert context.jwt is not None
+    assert os.path.isfile('jwt')
+
+
+@given("No JWT file exists")
+def step_impl(context):
+    if os.path.isfile('jwt'):
+        os.remove('jwt')
 
 
 @then("I see that no JWT has been created")
 def step_impl(context):
-    assert 'jwt' not in context
+    assert not os.path.isfile('jwt')
 
 
 @given("No private keys exist")
