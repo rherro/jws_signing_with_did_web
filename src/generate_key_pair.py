@@ -22,12 +22,15 @@ def save_key_pair_to_disk(key):
 
 
 def read_private_key_from_disk():
-    with open('private_key.pem', 'rb') as f:
-        data = f.read()
+    try:
+        with open('private_key.pem', 'rb') as f:
+            data = f.read()
 
-        key = jwk.JWK()
-        key.import_from_pem(data=data, password=PEM_PASSWORD)
-        return key.export_to_pem(private_key=True, password=None)
+            key = jwk.JWK()
+            key.import_from_pem(data=data, password=PEM_PASSWORD)
+            return key.export_to_pem(private_key=True, password=None)
+    except Exception as e:
+        raise Exception('Unable to read private key!')
 
 
 def generate_did_web():
