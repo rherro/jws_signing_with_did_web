@@ -1,7 +1,7 @@
 import os
 from behave import *
 from src.generate_key_pair import generate_key_pair, PRIVATE_KEY_FILENAME
-from src.jwt_handler import create_jwt, JWT_FILENAME
+from src.encode_jwt import encode_jwt, JWT_FILENAME
 
 use_step_matcher("re")
 
@@ -9,7 +9,7 @@ use_step_matcher("re")
 @when("I attempt to create a JWT using a private key")
 def step_impl(context):
     try:
-        create_jwt()
+        encode_jwt()
     except Exception:
         pass
 

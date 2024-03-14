@@ -1,9 +1,9 @@
 import os
 from behave import *
-from src.jwt_handler import decode_jwt
-from src.generate_key_pair import generate_key_pair, PRIVATE_KEY_FILENAME
-from src.generate_did import generate_did_web, DID_WEB_FILENAME
-from src.jwt_handler import create_jwt, PAYLOAD
+from generate_key_pair import generate_key_pair, PRIVATE_KEY_FILENAME
+from generate_did import generate_did_web, DID_WEB_FILENAME
+from encode_jwt import encode_jwt, PAYLOAD
+from decode_jwt import decode_jwt
 
 use_step_matcher("re")
 
@@ -12,7 +12,7 @@ use_step_matcher("re")
 def step_impl(context):
     generate_key_pair()
     generate_did_web()
-    create_jwt()
+    encode_jwt()
 
 
 @when("I decode a JWT")

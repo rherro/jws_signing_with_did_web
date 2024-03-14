@@ -2,7 +2,7 @@ import os
 from behave import *
 import urllib.request
 import urllib.error
-from generate_keys_and_did_document import generate_did_web, DID_WEB_FILENAME
+from generate_keys_and_did_document_steps import generate_did_web, DID_WEB_FILENAME
 
 use_step_matcher("re")
 

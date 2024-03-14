@@ -1,11 +1,10 @@
-from django.shortcuts import render
-from django.http import HttpResponse, HttpResponseNotFound, JsonResponse
+from django.http import HttpResponseNotFound, JsonResponse
 import json
 
 
 def index(request):
     try:
-        with open('../../data/did.json') as f:
+        with open('data/did.json') as f:
             did_web_json = json.load(f)
     except Exception as e:
         print('Error: Unable to open did.json file')

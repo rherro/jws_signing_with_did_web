@@ -1,5 +1,5 @@
 import json
-from src.generate_key_pair import generate_key_pair
+from generate_key_pair import generate_key_pair, PRIVATE_KEY_FILENAME, PUBLIC_KEY_FILENAME
 
 DEFAULT_DID = 'did:web:example.com'
 DID_WEB_FILENAME = 'data/did.json'
@@ -41,3 +41,11 @@ def create_did_document_contents(did, public_key_jwk):
         ]
     }
     return content
+
+
+if __name__ == '__main__':
+    generate_did_web()
+    print(f"The following files have been created:\n"
+          f"    1. {DID_WEB_FILENAME}\n"
+          f"    2. {PRIVATE_KEY_FILENAME}\n"
+          f"    3. {PUBLIC_KEY_FILENAME}\n")
