@@ -6,9 +6,10 @@ To use this project, you will need to have [Docker](https://docs.docker.com/engi
 ----
 
 ### Setup
-To setup the environment, clone this project and run the following:
+To setup the environment, clone this project and prepare a docker container by running the following:
 ```shell
 git clone git@github.com:rherro/jws_signing_with_did_web.git
+cd jws_signing_with_did_web
 docker build -t demo .
 docker run -it --rm demo
 ```
@@ -40,3 +41,12 @@ source .venv/bin/activate
     ```
     python src/decode_jwt.py
     ```
+
+----
+
+### Running the tests
+To run the acceptance tests for this project, run the following script while inside the active docker container.
+Make sure that the django webserver has been started already (step 2 above) otherwise some of the tests will fail.
+```
+./run_tests.sh
+```
