@@ -1,5 +1,3 @@
-import os
-
 from jwcrypto import jwk
 
 PEM_PASSWORD = 'WEAK_PASSWORD_FOR_DATA_AT_REST'.encode()
